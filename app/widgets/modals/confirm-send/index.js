@@ -33,6 +33,7 @@ function open(data) {
 
     try {
       if (importTxOptions) {
+        importTxOptions.unspents.pop();
         importTxOptions.fee = fee;
         tx = wallet.createImportTx(importTxOptions);
       } else {
@@ -47,7 +48,6 @@ function open(data) {
       }
       return handleTransactionError(err);
     }
-    tx.forEach(function(tx) {
       wallet.sendTx(tx, function (err, historyTx) {
         if (err) return handleTransactionError(err);
   
@@ -61,7 +61,6 @@ function open(data) {
           emitter.emit('append-transactions', [parseHistoryTx(historyTx)]);
         }
         //updateUrl();
-      });
     });
   });
 
