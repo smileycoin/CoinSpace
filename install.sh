@@ -59,6 +59,9 @@ cat <<EOF > /etc/systemd/system/${PROJECT_NAME}.service
 [Unit]
 Description=Backend daemon for ${PROJECT_NAME}
 After=network.target
+After=smileycoin-insight.service
+Requires=smileycoin-insight.service
+BindsTo=smileycoin-insight.service
 
 [Service]
 ExecStart=/usr/bin/npm start
